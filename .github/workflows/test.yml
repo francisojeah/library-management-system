@@ -32,6 +32,9 @@ jobs:
           - 5672:5672
           - 15672:15672
 
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -49,7 +52,7 @@ jobs:
     - name: Run frontend API tests
       working-directory: frontend-api
       run: |
-        pytest
+        python -m pytest
 
     - name: Install dependencies for admin API
       working-directory: admin-api
@@ -59,4 +62,4 @@ jobs:
     - name: Run admin API tests
       working-directory: admin-api
       run: |
-        pytest
+        python -m pytest
