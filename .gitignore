@@ -1,0 +1,36 @@
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Database files
+*.db
+*.sqlite3
+
+# Docker-specific
+.dockerignore
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Test results
+nosetests.xml
+coverage.xml
+*.cover
+
+# IDE/editor specific
+.vscode/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
