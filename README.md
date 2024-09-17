@@ -121,3 +121,8 @@ Ensure that your test cases are placed in `tests/` directories inside both `fron
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix.
 3. Submit a pull request with a clear description of the changes.
+
+## Continuous Integration
+
+This project uses **GitHub Actions** for continuous integration. The tests for both the Frontend and Admin APIs are automatically executed on every push or pull request to the `main` branch. The CI pipeline builds the Docker containers and runs the tests to ensure the code is functioning correctly.
+
