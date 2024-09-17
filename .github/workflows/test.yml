@@ -1,0 +1,62 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: library_frontend
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      mongo:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
+
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+          - 5672:5672
+          - 15672:15672
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies for frontend API
+      working-directory: frontend-api
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run frontend API tests
+      working-directory: frontend-api
+      run: |
+        pytest
+
+    - name: Install dependencies for admin API
+      working-directory: admin-api
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run admin API tests
+      working-directory: admin-api
+      run: |
+        pytest
